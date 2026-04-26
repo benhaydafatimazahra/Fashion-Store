@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produits - Fashion Store</title>
+    <link rel="stylesheet" href="product.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <h1>FASHION<br>&nbsp;&nbsp;&nbsp;STORE</h1>
+            <nav>
+                <a href="acceuil.html">Home</a>
+                <a href="prodact.html">Product</a>
+                <a href="panier.html">Panier</a>
+                <a href="contact.html">Contact</a>
+                <a href="commentaires.html">Comment</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h2 class="title">Nos Produits</h2>
+        
+        <div class="product-container">
+
+            <div class="product-card">
+                <img src="total.png" alt="Produit 1">
+                <div class="info">
+                    <p class="price">100.00 DH</p>
+                    <a href="panier.html"><button>Ajouter au panier</button></a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="w.png" alt="Produit 2">
+                <div class="info">
+                    <p class="price">1000.00 DH</p>
+                    <a href="panier.html"><button>Ajouter au panier</button></a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="pan.png" alt="Produit 3">
+                <div class="info">
+                    <p class="price">1500.00 DH</p>
+                    <a href="panier.html"><button>Ajouter au panier</button></a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="elig.png" alt="Produit 4">
+                <div class="info">
+                    <p class="price">2000.00 DH</p>
+                    <a href="panier.html"><button>Ajouter au panier</button></a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="ensemble.png" alt="Produit 5">
+                <div class="info">
+                    <p class="price">1300.00 DH</p>
+                    <a href="panier.html"><button>Ajouter au panier</button></a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="chic.png" alt="Produit 6">
+                <div class="info">
+                    <p class="price">1000.00 DH</p>
+                    <a href="panier.html"><button>Ajouter au panier</button></a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="cajul.png" alt="Produit 7">
+                <div class="info">
+                    <p class="price">2500.00 DH</p>
+                    <a href="panier.html"><button>Ajouter au panier</button></a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="bleus.png" alt="Produit 8">
+                <div class="info">
+                    <p class="price">2000.00 DH</p>
+                    <a href="panier.html"><button>Ajouter au panier</button></a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="ensemble.png" alt="Produit 9">
+                <div class="info">
+                    <p class="price">1055.00 DH</p>
+                    <a href="panier.html"><button>Ajouter au panier</button></a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="chic.png" alt="Produit 10">
+                <div class="info">
+                    <p class="price">1000.00 DH</p>
+                    <a href="panier.html"><button>Ajouter au panier</button></a>
+                </div>
+            </div>
+
+         </div> 
+    </main>
+
+    <script>
+    document.querySelectorAll('.product-card button').forEach(button => {
+        button.addEventListener('click', function() {
+            // Récupère les infos de la carte parente
+            const card = this.closest('.product-card');
+            const prixTexte = card.querySelector('.price').innerText;
+            const prix = parseFloat(prixTexte.replace(' DH', ''));
+            const nom = card.querySelector('img').alt;
+
+            // Enregistre dans le localStorage
+            let panier = JSON.parse(localStorage.getItem('monPanier')) || [];
+            panier.push({ nom: nom, prix: prix });
+            localStorage.setItem('monPanier', JSON.stringify(panier));
+        });
+    });
+    </script>
+</body>
+</html>
