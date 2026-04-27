@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commentaires - Fashion Store</title>
+    <link rel="stylesheet" href="acceuil.css">
+    <style>
+       
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d5bdaf;
+            border-radius: 8px;
+            background-color: #fdfaf0;
+            font-family: 'Georgia', serif;
+            margin-bottom: 15px;
+            resize: vertical;
+            min-height: 100px;
+            box-sizing: border-box;
+            outline: none;
+        }
+      
+        #commentForm button {
+            background-color: #d5bdaf;
+            color: white;
+            border: 2px solid transparent;
+            padding: 15px 30px;
+            width: 100%;
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(213, 189, 175, 0.4);
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        #commentForm button:hover {
+            background-color: white;
+            color: #d5bdaf;
+            border: 2px solid #d5bdaf;
+        }
+
+
+        #commentForm button:active {
+            background-color: white;
+            color: #d5bdaf;
+            border: 2px solid #d5bdaf;
+            transform: scale(0.95); 
+        }
+
+        .comment-display {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #f0ede4;
+        }
+
+        .comment-display h3 {
+            color: #d5bdaf;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .comment-item {
+            background: #fdfaf0;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            border-left: 5px solid #d5bdaf;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+
+        .comment-item strong {
+            color: #8d7b68;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .comment-item p {
+            margin: 0;
+            font-style: italic;
+            color: #4a4a4a;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <h1>FASHION<br>&nbsp;&nbsp;&nbsp;STORE</h1>
+            <nav>
+                <a href="acceuil.html">Home</a>
+                <a href="prodact.html">Product</a>
+                <a href="nouveau.html">Panier</a>
+                <a href="contact.html">Contact</a>
+                <a href="commentaires.html">Comment</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="form-main">
+        <section class="form-section">
+            <h2>Votre Avis</h2>
+            
+            <form id="commentForm">
+                <div>
+                    <label>Nom Complet</label>
+                    <input type="text" id="userName" placeholder="Votre nom" required>
+                </div>
+                <div>
+                    <label>Votre Commentaire</label>
+                    <textarea id="userComment" placeholder="Que pensez-vous de nos produits ?" required></textarea>
+                </div>
+                <button type="submit">Envoyer mon avis</button>
+            </form>
+
+            <div id="confirmationMessage" style="display:none; color: #8d7b68; text-align: center; margin-top: 20px; font-weight: bold; padding: 10px; border: 1px dashed #d5bdaf; border-radius: 10px;">
+                Merci ! Votre point de vue est pris en considération.
+            </div>
+
+            <div class="comment-display" id="commentsList">
+                <h3>Avis de nos clients</h3>
+                </div>
+        </section>
+    </main>
+
+    <script>
+        const commentForm = document.getElementById('commentForm');
+        const commentsList = document.getElementById('commentsList');
+        const confirmationMessage = document.getElementById('confirmationMessage');
+
+        commentForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('userName').value;
+            const comment = document.getElementById('userComment').value;
+
+            confirmationMessage.style.display = 'block';
+
+            const newComment = document.createElement('div');
+            newComment.className = 'comment-item';
+            newComment.innerHTML = `<strong>${name}</strong> <p>"${comment}"</p>`;
+
+            commentsList.prepend(newComment);
+
+            commentForm.reset();
+        
+            setTimeout(() => {
+                confirmationMessage.style.display = 'none';
+            }, 4000);
+        });
+    </script>
+
+    <center>
+        <footer> 
+            <h6> &copy; 2026 FASHION STORE </h6>
+        </footer>
+    </center>
+</body>
+</html>
