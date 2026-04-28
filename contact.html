@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paiement - Fashion Store</title>
+    <link rel="stylesheet" href="acceuil.css">
+    <style>
+        .contact-wrapper { max-width: 500px; margin: 40px auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px; background-color: #f9f9f9; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .form-group input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        
+        .btn-confirm { background: #d5bdaf; color: white; width: 100%; padding: 15px; cursor: pointer; border-radius: 50px; border: none; font-size: 1.1em; margin-top: 10px; }
+        .btn-confirm:hover { background: white; color: #d5bdaf; border: 2px solid #d5bdaf; }
+        
+        .btn-comment { background: #f4f4f4; color: #333; padding: 15px 45px; text-decoration: none; display: inline-block; border-radius: 50px; margin-top: 20px; border: 1px solid #ccc; text-align: center; width: 100%; box-sizing: border-box; }
+        
+        .summary { background: #fff; padding: 10px; border-radius: 5px; margin-bottom: 20px; border-left: 5px solid #d5bdaf; }
+    </style>
+</head>
+<body>
+
+    <header>
+         <h1>FASHION<br>&nbsp;&nbsp;&nbsp;STORE</h1>
+            <nav>
+                <a href="acceuil.html">Home</a>
+                <a href="prodact.html">Product</a>
+                <a href="panier.html">Panier</a>
+                <a href="contact.html">Contact</a>
+                <a href="commentaires.html">Comment</a>
+            </nav>
+    </header>
+
+    <main class="contact-wrapper">
+        <h2>Finaliser votre achat</h2>
+        
+        <div class="summary">
+            Total à régler : <span id="total-paiement">0</span> DH
+        </div>
+
+        <form id="payment-form" onsubmit="confirmerAchat(event)">
+            <div class="form-group">
+                <label for="nom">Nom Complet</label>
+                <input type="text" id="nom" placeholder="Votre nom et prénom" required>
+            </div>
+
+            <div class="form-group">
+                <label for="tel">Numéro de Téléphone</label>
+                <input type="tel" id="tel" placeholder="06XXXXXXXX" required>
+            </div>
+
+            <div class="form-group">
+                <label for="card">Informations Carte Bancaire</label>
+                <input type="text" id="card" maxlength="16" placeholder="4500 XXXX XXXX XXXX" required>
+            </div>
+
+            <button type="submit" class="btn-confirm">Confirmer l'achat</button>
+        </form>
+
+        <a href="commentaires.html" class="btn-comment">Laisser un commentaire</a>
+    </main>
+
+    <script>
+        
+        function chargerTotal() {
+            const totalAffichage = document.getElementById('total-paiement');
+            let panier = JSON.parse(localStorage.getItem('monPanier')) || [];
+            let total = 0;
+            panier.forEach(produit => {
+                total += produit.prix;
+            });
+            totalAffichage.innerText = total.toFixed(2);
+        }
+
+        function confirmerAchat(event) {
+            event.preventDefault(); 
+            
+            const nom = document.getElementById('nom').value;
+            
+            alert("Merci " + nom + " ! Votre commande a été confirmée avec succès.");
+            
+            
+            localStorage.removeItem('monPanier');
+            
+        }
+
+        window.onload = chargerTotal;
+    </script>
+
+</body>
+</html>
