@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Panier - Fashion Store</title>
+    <link rel="stylesheet" href="product.css"> <style>
+        .panier-wrapper { max-width: 800px; margin: 20px auto; padding: 20px; }
+        .panier-item { 
+            display: flex; align-items: center; justify-content: space-between;
+            border-bottom: 1px solid #ddd; padding: 10px 0;
+        }
+        .panier-item img { width: 50px; height: 50px; object-fit: cover; }
+        .total-section { text-align: right; margin-top: 20px; font-size: 1.5em; font-weight: bold; }
+        .btn-delete { background: #d5bdaf; color :white; padding: 5px 10px; cursor: pointer;  border:none ; text-decoration: none; display: inline-block;  border-radius: 50px;margin-top: 10px; border:none ;  }
+        .btn-clear { background:#d5bdaf; color: white; padding: 15px 50px; margin-top: 10px; cursor: pointer; border-radius: 50px;  border:none}
+        .btn-contact { background: #d5bdaf; color: white; padding: 15px 45px; text-decoration: none; display: inline-block;  border-radius: 50px;margin-top: 10px; border:none }
+    </style>
+</head>
+<body>
+
+    <header>
+         <h1>FASHION<br>&nbsp;&nbsp;&nbsp;STORE</h1>
+            <nav>
+                <a href="acceuil.html">Home</a>
+                <a href="prodact.html">Product</a>
+                <a href="panier.html">Panier</a>
+                <a href="contact.html">Contact</a>
+                <a href="commentaires.html">Comment</a>
+            </nav>
+    </header>
+
+    <main class="panier-wrapper">
+        <div id="liste-panier">
+            </div>
+
+        <div class="total-section">
+            Total: <span id="total-somme">0</span> DH
+        </div>
+
+        <button class="btn-clear" onclick="viderPanier()">Vider le panier</button>
+        <a href="contact.html" class="btn-contact">Passer à la page Contact</a>
+    </main>
+    
+    <script>
+        function afficherPanier() {
+            const liste = document.getElementById('liste-panier');
+            const totalAffichage = document.getElementById('total-somme');
+            let panier = JSON.parse(localStorage.getItem('monPanier')) || [];
+            
+            liste.innerHTML = "";
+            let total = 0;
+
+            if (panier.length === 0) {
+                liste.innerHTML = "<p>Votre panier est vide.</p>";
+            } else {
+                panier.forEach((produit, index) => {
+                    total += produit.prix;
+                    liste.innerHTML += `
+                        <div class="panier-item">
+                            <span>${produit.nom}</span>
+                            <span>${produit.prix} DH</span>
+                            <button class="btn-delete" onclick="supprimerProduit(${index})">Supprimer</button>
+                        </div>
+                    `;
+                });
+            }
+            totalAffichage.innerText = total.toFixed(2);
+        }
+
+        function supprimerProduit(index) {
+            let panier = JSON.parse(localStorage.getItem('monPanier')) || [];
+            panier.splice(index, 1); // Supprime l'élément à l'index donné
+            localStorage.setItem('monPanier', JSON.stringify(panier));
+            afficherPanier(); // Rafraîchir l'affichage
+        }
+
+        function viderPanier() {
+            if(confirm("Voulez-vous vraiment vider le panier ?")) {
+                localStorage.removeItem('monPanier');
+                afficherPanier();
+            }
+        }
+
+        // Charger le panier au démarrage
+        window.onload = afficherPanier;
+    </script>
+
+</body>
+</html>
