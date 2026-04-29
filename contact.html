@@ -63,7 +63,7 @@
         <a href="commentaires.html" class="btn-comment">Laisser un commentaire</a>
     </main>
 
-    <script>
+  <script>
         
         function chargerTotal() {
             const totalAffichage = document.getElementById('total-paiement');
@@ -84,11 +84,16 @@
             
             
             localStorage.removeItem('monPanier');
+
+            document.getElementById("payment-form").reset();
+
+            document.getElementById("total-paiement").innerText ="0.00";
             
         }
 
         window.onload = chargerTotal;
     </script>
+
 
 </body>
 </html>
